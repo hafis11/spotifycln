@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -67,6 +68,10 @@ const SideBar: React.FC<Props> = () => {
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                 </svg>
             </span>
+
+            <div onClick={() => signOut()} className='flex flex-row items-center py-3 cursor-pointer'>
+                <h5 className='pl-2 text-white font-semibold'>Log out</h5>
+            </div>
 
             {
                 Tab.map((item: any, index: number) => {

@@ -1,5 +1,8 @@
 import "../styles/globals.css";
 import Head from "next/head";
+import { SessionProvider } from "next-auth/react"
+import { Provider } from 'react-redux'
+import store from '../src/redux/index';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
   return (
@@ -10,7 +13,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
       </Head>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </SessionProvider>
     </>
   );
 }
