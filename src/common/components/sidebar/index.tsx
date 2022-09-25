@@ -90,9 +90,11 @@ const SideBar: React.FC<Props> = () => {
                 {
                     Option.map((item: any, index: number) => {
                         return (
-                            <div onClick={() => dispatch(actions.selectPlaylist(item))} key={index} className='py-1 cursor-pointer my-1'>
-                                <h4 className='text-white font-normal'>{item?.name}</h4>
-                            </div>
+                            <Link key={index} href={{ pathname: `/playlist/${item?.id}` }}>
+                                <div className='py-1 cursor-pointer my-1'>
+                                    <h4 className='text-white font-normal'>{item?.name}</h4>
+                                </div>
+                            </Link>
                         )
                     })
                 }

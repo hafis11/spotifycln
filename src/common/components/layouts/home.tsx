@@ -6,10 +6,9 @@ interface Props {
     children: JSX.Element[] | JSX.Element
 }
 
-
 const HomeLayout: React.FC<Props> = ({ children }: Props) => {
     return (
-        <div className="w-full h-full grid grid-cols-7 flex-1 select-none">
+        <div className="w-full h-full grid grid-cols-7 flex-1 select-none overflow-hidden">
             <div className='bg-black col-span-1'>
                 <SideBar />
             </div>
