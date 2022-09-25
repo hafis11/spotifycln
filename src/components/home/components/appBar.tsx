@@ -1,11 +1,14 @@
-import { useSession } from 'next-auth/react';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { user, theme as color } from '../../../redux/selecter';
 
 const AppBar: React.FC = () => {
-    const { data: session } = useSession();
+
+    const userData = useSelector(user);
+    const themeColor = useSelector(color);
 
     return (
-        <div className='flex flex-row justify-between items-center px-4 py-4 sticky top-0 z-50 bg-indigo-900/90 w-full'>
+        <div className={`flex flex-row justify-between items-center px-4 py-4 sticky top-0 z-50 bg-[${themeColor}] w-full`}>
             <div className='flex-row flex'>
                 <div className='bg-black/70 w-7 h-7 rounded-full flex justify-center items-center cursor-pointer'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -21,19 +24,15 @@ const AppBar: React.FC = () => {
             </div>
 
             <div className='flex-row flex'>
-                <div className='mr-7 bg-black/50 px-6 rounded-full border cursor-pointer'>
-                    <h5 className='text-white text-xs font-medium m-0 p-0 py-2'>UPGRADE</h5>
-                </div>
-
-                <div className='flex-row flex bg-black rounded-full items-center pr-2 cursor-pointer'>
+                <div className='flex-row flex bg-black rounded-full items-center pr-2 py-1 cursor-pointer'>
                     <div className='bg-gray-600 rounded-full w-7 h-7 flex justify-center items-center ml-0.5'>
                         {
-                            session?.user?.image ? <img src={session?.user?.image} className="h-7 w-7 rounded-full" /> : <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            userData?.image ? <img src={userData?.image} className="h-7 w-7 rounded-full" /> : <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         }
                     </div>
-                    <h4 className='font-semibold text-white pr-3 text-xs pl-2'>{session?.user?.name}</h4>
+                    <h4 className='font-semibold text-white pr-3 text-xs pl-2'>{userData?.name}</h4>
 
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-white" viewBox="0 0 20 20" fill="currentColor">

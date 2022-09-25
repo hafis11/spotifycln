@@ -1,18 +1,23 @@
 import Image from 'next/image';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectedList, theme as color } from '../../../redux/selecter';
 
 const PlayerProfile: React.FC = () => {
 
+    const playList = useSelector(selectedList);
+    const themeColor = useSelector(color);
+
     return (
-        <div className='w-full h-3/6 flex flex-col items-center justify-between bg-gradient-to-b from-indigo-900'>
-            <div className='flex flex-row w-full items-end px-8 pt-8'>
-                <Image className='pointer-events-none' src="/poster1.jpg" width={200} height={250} />
+        <div className={`w-full h-3/6 flex flex-col items-center justify-between bg-gradient-to-b from-[${themeColor}]`}>
+            <div className='flex flex-row w-full items-center px-8 pt-8'>
+                <Image className='pointer-events-none' src={playList?.images?.[0]?.url} width={200} height={230} />
                 <div className='flex flex-col pl-5'>
                     <h4 className='text-white font-semibold text-base'>ALBUM</h4>
-                    <h1 className='text-white font-extrabold text-8xl'>Thallumaala</h1>
+                    <h1 className='text-white font-bold text-8xl'>{playList?.name}</h1>
                     <div className='flex flex-row items-center py-4'>
                         <img className="w-6 h-6 rounded-full pointer-events-none" src="/poster1.jpg" alt="poster" />
-                        <h4 className='pl-2 text-white text-sm'>Vishnu Vijay . 2022 . 8 songs, 24 min 20 sec</h4>
+                        <h4 className='pl-2 text-white text-sm'>{`${playList?.owner?.display_name}. ${playList?.tracks?.total} songs, 24 min 20 sec`}</h4>
                     </div>
                 </div>
             </div>

@@ -2,9 +2,10 @@ import "../styles/globals.css";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react"
 import { Provider } from 'react-redux'
-import store from '../src/redux/index';
+import { wrapper } from '../src/redux/index';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
+function MyApp({ Component, ...rest }: any) {
+  const { store, props } = wrapper.useWrappedStore(rest);
   return (
     <>
       <Head>
@@ -13,9 +14,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
       </Head>
-      <SessionProvider session={session}>
+      <SessionProvider session={props.session}>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <Component {...props.pageProps} />
         </Provider>
       </SessionProvider>
     </>

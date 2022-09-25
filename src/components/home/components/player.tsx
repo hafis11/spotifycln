@@ -1,14 +1,53 @@
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useSongInfo from '../../../common/hooks/useSongInfo';
+import useSpotify from '../../../common/hooks/useSpotify';
+import { currentTrackid, user } from '../../../redux/selecter';
+import { actions } from '../../../redux/slice';
+
 
 const Player: React.FC = () => {
+    const dispatch = useDispatch();
+    const spotifyApi = useSpotify()
+    const songInfo: any = useSongInfo();
+    const { data: session } = useSession();
+    const trackId = useSelector(currentTrackid);
+
+    const fetchCurrentSong = () => {
+        if (!songInfo) {
+            spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+                dispatch(actions.setCurrentTrack(data?.body?.item?.id));
+            });
+
+            spotifyApi.getMyCurrentPlaybackState().then((data) => {
+                dispatch(actions.setIsPlaying(data?.body?.is_playing));
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (spotifyApi.getAccessToken() && !trackId) {
+            fetchCurrentSong();
+        }
+        () => { };
+    }, [spotifyApi, trackId, session]);
+
+
     return (
-        <div className='w-full bg-gray-800/95 absolute flex flex-row justify-between items-center bottom-0 z-50 h-[5.5rem] px-5'>
-            <div className='flex flex-row items-center'>
-                <Image className='pointer-events-none' src="/poster1.jpg" width={40} height={50} />
+        <div className={`w-full bg-gray-800/95 absolute ${songInfo ? 'flex' : 'hidden'} flex-row justify-between items-center bottom-0 z-50 h-[5.5rem] px-5`}>
+            <div className='flex flex-row items-center w-80'>
+                <Image className='pointer-events-none' src={songInfo?.album?.images?.[0]?.url} width={40} height={50} />
                 <div className='pl-3 text-white'>
-                    <h4 className='font-medium'>Kannil Pettole - From Thallumaala</h4>
-                    <h5 className='font-light text-sm'>Vishnu Vijay, Irfana</h5>
+                    <h4 className='font-medium line-clamp-1'>{songInfo?.name}</h4>
+                    <h5 className='font-light text-sm line-clamp-1'>
+                        {
+                            songInfo?.artists.map((item: any) => {
+                                return <span>{item?.name},</span>
+                            })
+                        }
+                    </h5>
                 </div>
 
                 <span className='ml-6 cursor-pointer'>
