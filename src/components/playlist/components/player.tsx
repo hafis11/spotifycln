@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useSongInfo from '../../../common/hooks/useSongInfo';
 import useSpotify from '../../../common/hooks/useSpotify';
-import { currentTrackid, isPlaying, user } from '../../../redux/selecter';
+import { currentTrackid, isPlaying } from '../../../redux/selecter';
 import { IoMdPlay, IoIosPause } from 'react-icons/io';
 import { actions } from '../../../redux/slice';
 import Modal from '../../../common/components/core/modal';
