@@ -16,6 +16,9 @@ const Home: React.FC = () => {
     const themeColor = useSelector(color);
     const songInfo: any = useSongInfo();
 
+    const Full = "100vh".split('"').join('');
+    const Half = "92vh".split('"').join('');
+
     useMemo(() => {
         const getTheme = () => {
             if (album) {
@@ -33,7 +36,7 @@ const Home: React.FC = () => {
     }, [album])
 
     return (
-        <div className={`h-[${songInfo ? '92vh' : '100vh'}] w-full bg-gradient-to-b from-[${themeColor}] overflow-y-scroll relative no-scrollbar`}>
+        <div className={`${songInfo ? 'h-[92vh]' : 'h-[100vh]'} w-full bg-gradient-to-b from-[${themeColor}] overflow-y-scroll relative no-scrollbar`}>
             <AppBar />
             <PlayerProfile />
             <MusicList />

@@ -40,7 +40,6 @@ const Player: React.FC = () => {
         if (spotifyApi.getAccessToken()) {
             spotifyApi.getMyDevices().then((data) => {
                 let availableDevices = data.body.devices;
-                console.log("availableDevices :", availableDevices)
                 if (availableDevices.length > 0 && availableDevices.filter(e => e.is_active === true).length > 0) {
                     spotifyApi.getMyCurrentPlaybackState().then((data) => {
                         if (data?.body?.is_playing) {
