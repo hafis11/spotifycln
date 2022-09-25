@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer as profileReducer } from "./profile/slice";
+import { reducer as profileReducer } from "./slice";
+import { createWrapper } from "next-redux-wrapper";
 
-export default configureStore({
-  reducer: {
-    profile: profileReducer,
-  },
-});
+const makeStore = () =>
+  configureStore({
+    reducer: {
+      profile: profileReducer,
+    },
+  });
+
+export const wrapper = createWrapper(makeStore);

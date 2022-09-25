@@ -4,5 +4,6 @@ const withPWA = require("next-pwa")({
 });
 
 module.exports = withPWA({
+  images: { domains: ["mosaic.scdn.co", "i.scdn.co"] },
   reactStrictMode: true,
 });

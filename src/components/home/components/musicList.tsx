@@ -1,21 +1,57 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useSpotify from '../../../common/hooks/useSpotify';
+import { albumList, selectedList } from '../../../redux/selecter';
+import moment from 'moment';
+import { actions } from '../../../redux/slice';
 
 const MusicList: React.FC = () => {
+    const playList = useSelector(selectedList);
+    const album = useSelector(albumList);
+    const spotifyApi = useSpotify()
+    const dispatch = useDispatch();
+
+
+    useMemo(() => {
+        if (spotifyApi.getAccessToken()) {
+            spotifyApi.getPlaylist(playList?.id).then((data) => {
+                dispatch(actions.getAlbum(data?.body))
+            })
+        }
+    }, [playList])
+
+
+    const playSong = (item: any) => {
+        try {
+            dispatch(actions.setCurrentTrack(item?.track?.id));
+            dispatch(actions.setIsPlaying(true));
+            spotifyApi.play({
+                uris: [item?.track?.uri],
+            })
+        } catch (e: any) {
+            alert(e.message)
+        }
+    }
+
+
     return (
         <div className='w-full backdrop-blur-sm bg-gradient-to-b from-black/30 px-8 pb-4'>
             <div className="overflow-x-auto relative">
                 <table className="w-full text-sm text-left text-gray-500">
                     <thead className="text-xs text-white/80 uppercase">
                         <tr>
-                            <th scope="col" className="py-3 px-6">
+                            <th scope="col" className="py-3 px-3">
                                 #
                             </th>
-                            <th scope="col" className="py-3 px-6">
+                            <th scope="col" className="py-3 pr-6">
                                 TITLE
                             </th>
                             <th scope="col" className="py-3 px-6">
-                                PLAYS
+                                ALBUM
+                            </th>
+                            <th scope="col" className="py-3 px-6">
+                                DATE ADDED
                             </th>
                             <th scope="col" className="py-3 px-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -26,25 +62,35 @@ const MusicList: React.FC = () => {
                     </thead>
                     <tbody>
                         {
-                            List.map((item: any, index: number) => (
-                                <tr key={index} className="text-white/80 hover:bg-white/25 group">
-                                    <td className="py-4 px-6">
+                            album?.tracks?.items?.map((item: any, index: number) => (
+                                <tr key={index} onDoubleClick={() => playSong(item)} className="text-white/80 hover:bg-white/25 group">
+                                    <td className="py-4">
                                         <div className='w-8 h-8 flex justify-center items-center'>
-                                            <h4 className='block group-hover:hidden'>{item?.id}</h4>
+                                            <h4 className='block group-hover:hidden'>{index + 1}</h4>
                                             <span className='hidden group-hover:block'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='fill-white' width="16" height="16"><path fill="none" d="M0 0h24v24H0z" /><path d="M19.376 12.416L8.777 19.482A.5.5 0 0 1 8 19.066V4.934a.5.5 0 0 1 .777-.416l10.599 7.066a.5.5 0 0 1 0 .832z" /></svg>
                                             </span>
                                         </div>
                                     </td>
-                                    <th scope="row" className="py-4 px-6">
-                                        <h5 className='font-medium text-white/80 whitespace-nowrap'>{item?.title}</h5>
-                                        <h4 className='text-xs font-normal text-white/80 whitespace-nowrap'>{item?.auther}</h4>
+                                    <th scope="row" className="py-4 pr-6 flex flex-row">
+                                        <Image className='pointer-events-none rounded-sm shadow-2xl bg-black' src={item?.track?.album?.images?.[0]?.url} width={38} height={40} />
+                                        <div className='flex flex-col pl-2'>
+                                            <h5 className='font-medium text-white/80 whitespace-nowrap'>{item?.track?.name}</h5>
+                                            <h4 className='text-xs font-normal text-white/80 whitespace-nowrap'>{
+                                                item?.track.artists.map((item: any) => {
+                                                    return <span>{item?.name},</span>
+                                                })
+                                            }</h4>
+                                        </div>
                                     </th>
                                     <td className="py-4 px-6">
-                                        {item?.plays}
+                                        {item?.track?.album?.name}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {item?.time}
+                                        {moment(item?.track?.album?.release_date).startOf('day').fromNow()}
+                                    </td>
+                                    <td className="py-4 px-6">
+                                        {`${Math.floor((item?.track?.duration_ms / 1000 / 60) << 0)} : ${Math.floor((item?.track?.duration_ms / 1000) % 60)}`}
                                     </td>
                                 </tr>
                             ))
