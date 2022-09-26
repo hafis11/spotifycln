@@ -96,8 +96,8 @@ const MusicList: React.FC = () => {
                                             <div className='flex flex-col pl-2'>
                                                 <h5 className='font-medium text-white/80 whitespace-nowrap'>{item?.track?.name}</h5>
                                                 <h4 className='text-xs font-normal text-white/80 whitespace-nowrap'>{
-                                                    item?.track.artists.map((item: any) => {
-                                                        return <span>{item?.name},</span>
+                                                    item?.track.artists.map((item: any, index: any) => {
+                                                        return <span key={index}>{item?.name},</span>
                                                     })
                                                 }</h4>
                                             </div>

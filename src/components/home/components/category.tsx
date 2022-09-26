@@ -4,25 +4,26 @@ import { AiOutlineSetting } from 'react-icons/ai'
 
 
 interface Props {
-
+    categories: any
 }
 
-const Category: React.FC<Props> = () => {
+const Category: React.FC<Props> = ({ categories }) => {
+
     return (
         <div className='w-full px-4 pb-4'>
-            <div className='md:py-3 py-4 flex flex-row justify-between items-center'>
+            <div className='md:py-3 py-4 md:pb-6 flex flex-row justify-between items-center'>
                 <div>
                     <h4 className='font-bold text-2xl text-white'>Good afternoon</h4>
                 </div>
 
-                <div className='text-white flex flex-row items-center'>
+                <div className='text-white flex flex-row items-center md:hidden'>
                     <IoMdNotificationsOutline className='text-2xl ml-2.5' />
                     <IoIosTimer className='text-2xl ml-2.5' />
                     <AiOutlineSetting className='text-2xl ml-2.5' />
                 </div>
             </div>
 
-            <div className='flex flex-row justify-start items-center pb-6 gap-x-2'>
+            <div className='flex flex-row justify-start items-center pb-6 gap-x-2 md:hidden'>
                 <div className='bg-gray-500 text-white rounded-full px-4'>
                     <h4 className="text-sm py-1">Music</h4>
                 </div>
@@ -34,12 +35,12 @@ const Category: React.FC<Props> = () => {
 
             <div className='grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2'>
                 {
-                    [1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => {
+                    categories?.map((item: any, index: any) => {
                         return (
                             <div key={index} className='group flex flex-row items-center bg-gray-500/20 hover:bg-gray-500/60 shadow-xl rounded-md overflow-hidden cursor-pointer relative'>
-                                <div className='shadow-2xl'><img src='/poster1.jpg' className='w-10 md:w-16 object-fill' /></div>
+                                <div className='shadow-2xl'><img src={item?.icons?.[0]?.url} className='w-14 h-14 md:w-24 md:h-24 object-fill' /></div>
                                 <div className='md:pl-4 pl-2'>
-                                    <h5 className='font-bold text-white'>My Playlist #2</h5>
+                                    <h5 className='font-bold text-white'>{item?.name}</h5>
                                 </div>
 
                                 <span className='cursor-pointer mr-3 w-12 h-12 rounded-full bg-green-600 md:group-hover:flex justify-center items-center hover:scale-105 absolute right-1 hidden'>

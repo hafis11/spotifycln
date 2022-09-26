@@ -15,7 +15,7 @@ const Recently: React.FC<Props> = ({ track, message }) => {
                 <h3 className='text-white text-sm font-medium cursor-pointer'>SEE ALL</h3>
             </div>
 
-            <div className='w-full flex flex-row md:grid grid-cols-6 md:pb-7 gap-3 pb-0 md:gap-4 px-4 overflow-auto snap-x no-scrollbar'>
+            <div className='w-full flex flex-row md:grid grid-cols-6 md:pb-7 gap-3 pb-0 md:gap-4 px-4 overflow-auto md:overflow-hidden snap-x no-scrollbar'>
                 {
                     track?.map((item: any, index: number) => {
                         return (
@@ -28,6 +28,13 @@ const Recently: React.FC<Props> = ({ track, message }) => {
                                 </div>
                                 <div className='flex flex-col py-3 pb-4'>
                                     <h4 className='text-white font-bold text-sm line-clamp-1'>{item?.track?.name}</h4>
+                                    <h4 className='text-white font-light text-xs line-clamp-1'>
+                                        {
+                                            item?.track?.artists.map((item: any, index: any) => {
+                                                return <span key={index}>{item?.name},</span>
+                                            })
+                                        }
+                                    </h4>
                                 </div>
                             </div>
                         )

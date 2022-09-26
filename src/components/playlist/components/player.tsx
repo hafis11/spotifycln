@@ -10,7 +10,11 @@ import { actions } from '../../../redux/slice';
 import Modal from '../../../common/components/core/modal';
 
 
-const Player: React.FC = () => {
+interface Props {
+
+}
+
+const Player: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const spotifyApi = useSpotify()
     let [isOpen, setIsOpen] = useState(false)

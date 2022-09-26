@@ -18,7 +18,7 @@ const PlayList: React.FC = () => {
 
     useMemo(() => {
         const getTheme = () => {
-            if (album) {
+            if (album && album?.images?.[0]?.url) {
                 const fac = new FastAverageColor();
                 fac.getColorAsync(album?.images?.[0]?.url)
                     .then((color: any) => {

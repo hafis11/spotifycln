@@ -9,7 +9,6 @@ import TopTrack from './components/topTrack';
 
 
 const Home: React.FC = () => {
-
     const spotifyApi = useSpotify();
     const { data: session } = useSession();
     const [editor, seteditor] = useState<any>();
@@ -18,15 +17,13 @@ const Home: React.FC = () => {
     const [playlist, SetPlaylist] = useState<any>();
     const [recently, SetRecently] = useState<any>();
     const [track, SetTrack] = useState<any>();
-
-
-
+    const [categories, SetCategories] = useState<any>();
 
     useEffect(() => {
         if (spotifyApi.getAccessToken()) {
             /* Get a User’s Top Tracks*/
             spotifyApi.getFeaturedPlaylists({
-                limit: 8,
+                limit: 6,
                 offset: 0,
                 country: 'IN',
             })
@@ -35,21 +32,21 @@ const Home: React.FC = () => {
                 }, function (err) {
                     console.log("Something went wrong!", err);
                 });
-            spotifyApi.searchPlaylists('workout', { limit: 8 })
+            spotifyApi.searchPlaylists('workout', { limit: 6 })
                 .then(function (data: any) {
                     setWordOut(data?.body);
                 }, function (err) {
                     console.log('Something went wrong!', err);
                 });
 
-            spotifyApi.getNewReleases({ limit: 5, offset: 0, country: 'IN', })
+            spotifyApi.getNewReleases({ limit: 6, offset: 0, country: 'IN', })
                 .then(function (data: any) {
                     setAlbum(data?.body);
                 }, function (err) {
                     console.log("Something went wrong!", err);
                 });
 
-            spotifyApi.getFeaturedPlaylists({ limit: 7, offset: 1, country: 'IN', timestamp: '2021-09-26T09:00:00' })
+            spotifyApi.getFeaturedPlaylists({ limit: 6, offset: 1, country: 'IN', timestamp: '2021-09-26T09:00:00' })
                 .then(function (data) {
                     SetPlaylist(data.body);
                 }, function (err) {
@@ -57,7 +54,7 @@ const Home: React.FC = () => {
                 });
 
             spotifyApi.getMyRecentlyPlayedTracks({
-                limit: 8
+                limit: 6
             }).then(function (data) {
                 // Output items
                 SetRecently(data.body);
@@ -67,7 +64,7 @@ const Home: React.FC = () => {
             });
 
             /* Get a User’s Top Tracks*/
-            spotifyApi.getMyTopTracks({ limit: 8 })
+            spotifyApi.getMyTopTracks({ limit: 6 })
                 .then(function (data) {
                     let topTracks = data.body.items;
                     SetTrack(topTracks);
@@ -75,14 +72,26 @@ const Home: React.FC = () => {
                     console.log('Something went wrong!', err);
                 });
 
+            spotifyApi.getCategories({
+                limit: 8,
+                offset: 0,
+                country: 'IN',
+            })
+                .then(function (data) {
+                    SetCategories(data.body?.categories);
+                }, function (err) {
+                    console.log("Something went wrong!", err);
+                });
+
         }
         () => { }
     }, [spotifyApi, session])
 
+
     return (
         <div className='w-full h-[100vh] md:h-[92vh] bg-gradient-to-b from-gray-900 overflow-y-scroll overflow-x-hidden relative no-scrollbar md:style-scrollbar pb-36 md:pb-0'>
             <AppBar />
-            <Category />
+            <Category categories={categories?.items} />
             <Recently track={recently?.items} message={"Recently"} />
             <TopTrack track={track} message={"Top Tracks"} />
             <List track={editor?.playlists?.items} message={editor?.message} />
