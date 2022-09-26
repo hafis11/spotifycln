@@ -9,7 +9,7 @@ const initialState: AuthState = {
   album: [],
   currentTrackIdState: null,
   isPlaying: false,
-  theme: "#ffff",
+  theme: "#111827",
 };
 
 const slice = createSlice({

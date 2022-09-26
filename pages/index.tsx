@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import { getSession } from 'next-auth/react';
 import Head from 'next/head'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import HomeLayout from '../src/common/components/layouts/home';
 import Home from '../src/components/home';
 import Player from '../src/components/playlist/components/player';
@@ -9,6 +11,13 @@ import { actions } from '../src/redux/slice';
 
 
 const Index: NextPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actions.saveTheme('transparent'))
+  }, [])
+
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-black/95">
       <Head>

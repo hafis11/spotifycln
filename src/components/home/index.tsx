@@ -1,7 +1,10 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import AppBar from '../../common/components/core/appBar/appBar';
+import useSongInfo from '../../common/hooks/useSongInfo';
 import useSpotify from '../../common/hooks/useSpotify';
+import { theme } from '../../redux/selecter';
 import Category from './components/category';
 import List from './components/list';
 import Recently from './components/recent';
@@ -18,6 +21,8 @@ const Home: React.FC = () => {
     const [recently, SetRecently] = useState<any>();
     const [track, SetTrack] = useState<any>();
     const [categories, SetCategories] = useState<any>();
+    const themeColor: string = useSelector(theme);
+    const songInfo: any = useSongInfo();
 
     useEffect(() => {
         if (spotifyApi.getAccessToken()) {
@@ -89,7 +94,7 @@ const Home: React.FC = () => {
 
 
     return (
-        <div className='w-full h-[100vh] md:h-[92vh] bg-gradient-to-b from-gray-900 overflow-y-scroll overflow-x-hidden relative no-scrollbar md:style-scrollbar pb-36 md:pb-0'>
+        <div className='w-full h-[100vh] overflow-y-scroll overflow-x-hidden relative no-scrollbar md:style-scrollbar pb-36 md:pb-0' style={{ background: `linear-gradient(0deg, transparent 0%, ${themeColor} 90%)` }}>
             <AppBar />
             <Category categories={categories?.items} />
             <Recently track={recently?.items} message={"Recently"} />
@@ -103,3 +108,5 @@ const Home: React.FC = () => {
 }
 
 export default Home;
+
+// w-full h-[100vh] overflow-y-scroll overflow-x-hidden relative no-scrollbar md:style-scrollbar pb-36 md:pb-0

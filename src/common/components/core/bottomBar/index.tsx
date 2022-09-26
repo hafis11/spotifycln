@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 import { IoIosPause, IoMdHeart, IoMdPlay } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentTrackid, isPlaying } from '../../../../redux/selecter';
+import { currentTrackid, isPlaying, theme } from '../../../../redux/selecter';
 import { actions } from '../../../../redux/slice';
 import useSongInfo from '../../../hooks/useSongInfo';
 import useSpotify from '../../../hooks/useSpotify';
@@ -22,6 +22,7 @@ const BottomBar: React.FC<Props> = () => {
     const { data: session } = useSession();
     const trackId = useSelector(currentTrackid);
     const status = useSelector(isPlaying);
+    const themeColor: string = useSelector(theme);
 
 
     function closeModal() {
@@ -71,10 +72,10 @@ const BottomBar: React.FC<Props> = () => {
 
 
     return (
-        <>
+        <div className='fixed bottom-0 w-full'>
             <Modal isOpen={isOpen} closeModal={closeModal} />
-            <div className='fixed bottom-0 w-full block md:hidden'>
-                <div className='bg-blue-300 w-11/12 mx-auto rounded-lg overflow-hidden'>
+            <div className='w-full block md:hidden'>
+                <div className={`w-[98vw] mx-auto rounded-lg overflow-hidden text-white ${songInfo ? 'block' : 'hidden'}`} style={{ backgroundColor: themeColor }}>
                     <div className='flex flex-row justify-between items-center p-2'>
                         <div className='flex flex-row'>
                             <img src={songInfo?.album?.images?.[0]?.url} className='w-12 h-12 rounded-md' />
@@ -126,7 +127,7 @@ const BottomBar: React.FC<Props> = () => {
                     </span>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 export default BottomBar;

@@ -7,14 +7,17 @@ import { wrapper } from '../../src/redux';
 import { actions } from '../../src/redux/slice';
 import { useMemo } from 'react';
 import useSpotify from '../../src/common/hooks/useSpotify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Player from '../../src/components/playlist/components/player';
 import PlayList from '../../src/components/playlist';
+import { albumList } from '../../src/redux/selecter';
+import { FastAverageColor } from "fast-average-color";
 
 
 const Index: NextPage = () => {
     const spotifyApi = useSpotify()
     const dispatch = useDispatch();
+    const album = useSelector(albumList);
     const router = useRouter();
     const { id } = router.query;
 
@@ -31,6 +34,22 @@ const Index: NextPage = () => {
             }
         }
     }, [id])
+
+    useMemo(() => {
+        const getTheme = () => {
+            if (album && album?.images?.[0]?.url) {
+                const fac = new FastAverageColor();
+                fac.getColorAsync(album?.images?.[0]?.url)
+                    .then((color: any) => {
+                        dispatch(actions.saveTheme(color?.hex))
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
+            }
+        };
+        getTheme();
+    }, [album, spotifyApi])
 
 
     return (

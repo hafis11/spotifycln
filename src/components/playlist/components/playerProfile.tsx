@@ -9,7 +9,7 @@ const PlayerProfile: React.FC = () => {
     const themeColor: string = useSelector(color);
 
     return (
-        <div className={`w-full h-3/6 flex flex-col items-center justify-between bg-gradient-to-b from-[${themeColor}]`}>
+        <div className={`w-full h-3/6 flex flex-col items-center justify-between`} style={{ background: `linear-gradient(0deg, transparent 0%, ${themeColor} 90%)` }}>
             <div className='flex flex-row w-full items-center px-8 pt-8'>
                 <Image className='pointer-events-none' src={playList?.images?.[0]?.url} width={200} height={230} />
                 <div className='flex flex-col pl-5'>

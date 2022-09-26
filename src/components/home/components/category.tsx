@@ -1,6 +1,9 @@
 import React from 'react';
 import { IoIosTimer, IoMdNotificationsOutline } from 'react-icons/io';
 import { AiOutlineSetting } from 'react-icons/ai'
+import { useDispatch } from 'react-redux';
+import { actions } from '../../../redux/slice';
+import { FastAverageColor } from "fast-average-color";
 
 
 interface Props {
@@ -8,6 +11,23 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ categories }) => {
+    const dispatch = useDispatch();
+
+    const onMouseEnter = (img: string) => {
+        return (event: React.MouseEvent) => {
+            if (img) {
+                const fac = new FastAverageColor();
+                fac.getColorAsync(img)
+                    .then((color: any) => {
+                        dispatch(actions.saveTheme(color?.hex))
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
+            }
+            event.preventDefault();
+        }
+    }
 
     return (
         <div className='w-full px-4 pb-4'>
@@ -37,7 +57,7 @@ const Category: React.FC<Props> = ({ categories }) => {
                 {
                     categories?.map((item: any, index: any) => {
                         return (
-                            <div key={index} className='group flex flex-row items-center bg-gray-500/20 hover:bg-gray-500/60 shadow-xl rounded-md overflow-hidden cursor-pointer relative'>
+                            <div key={index} onMouseEnter={onMouseEnter(item?.icons?.[0]?.url as any)} className='group flex flex-row items-center bg-gray-500/20 hover:bg-gray-500/60 shadow-xl rounded-md overflow-hidden cursor-pointer relative'>
                                 <div className='shadow-2xl'><img src={item?.icons?.[0]?.url} className='w-14 h-14 md:w-24 md:h-24 object-fill' /></div>
                                 <div className='md:pl-4 pl-2'>
                                     <h5 className='font-bold text-white'>{item?.name}</h5>
