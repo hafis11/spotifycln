@@ -10,7 +10,7 @@ import useSpotify from '../../src/common/hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import Player from '../../src/components/playlist/components/player';
 import PlayList from '../../src/components/playlist';
-import { albumList } from '../../src/redux/selecter';
+import { albumList, theme } from '../../src/redux/selecter';
 import { FastAverageColor } from "fast-average-color";
 
 
@@ -18,6 +18,7 @@ const Index: NextPage = () => {
     const spotifyApi = useSpotify()
     const dispatch = useDispatch();
     const album = useSelector(albumList);
+    const themeColor = useSelector(theme);
     const router = useRouter();
     const { id } = router.query;
 
@@ -57,6 +58,7 @@ const Index: NextPage = () => {
             <Head>
                 <title>Spotify</title>
                 <link rel="icon" href="/icons/favicon.ico" />
+                <meta name="theme-color" content={themeColor} />
             </Head>
             <HomeLayout>
                 <PlayList />

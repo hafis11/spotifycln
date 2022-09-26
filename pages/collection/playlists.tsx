@@ -8,14 +8,18 @@ import { actions } from '../../src/redux/slice';
 import Player from '../../src/components/playlist/components/player';
 import HomeLayout from '../../src/common/components/layouts/home';
 import Library from '../../src/components/library';
+import { useSelector } from 'react-redux';
+import { theme } from '../../src/redux/selecter';
 
 
 const Index: NextPage = () => {
+    const themeColor = useSelector(theme);
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-black/95">
             <Head>
                 <title>Spotify</title>
                 <link rel="icon" href="/icons/favicon.ico" />
+                <meta name="theme-color" content={themeColor} />
             </Head>
             <HomeLayout>
                 <Library />

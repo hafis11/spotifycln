@@ -14,7 +14,6 @@ export default function Document() {
                 <meta name="msapplication-config" content="/icons/browserconfig.xml" />
                 <meta name="msapplication-TileColor" content="#2B5797" />
                 <meta name="msapplication-tap-highlight" content="no" />
-                <meta name="theme-color" content="#111827" />
 
                 <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png" />
                 <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png" />

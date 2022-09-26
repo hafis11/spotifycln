@@ -2,16 +2,18 @@ import type { NextPage } from 'next'
 import { getSession } from 'next-auth/react';
 import Head from 'next/head'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import HomeLayout from '../src/common/components/layouts/home';
 import Home from '../src/components/home';
 import Player from '../src/components/playlist/components/player';
 import { wrapper } from '../src/redux';
+import { theme } from '../src/redux/selecter';
 import { actions } from '../src/redux/slice';
 
 
 const Index: NextPage = () => {
   const dispatch = useDispatch();
+  const themeColor = useSelector(theme);
 
   useEffect(() => {
     dispatch(actions.saveTheme('transparent'))
@@ -23,6 +25,7 @@ const Index: NextPage = () => {
       <Head>
         <title>Spotify</title>
         <link rel="icon" href="/icons/favicon.ico" />
+        <meta name="theme-color" content={themeColor} />
       </Head>
       <HomeLayout>
         <Home />
