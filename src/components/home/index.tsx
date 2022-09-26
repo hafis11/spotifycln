@@ -2,7 +2,6 @@ import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AppBar from '../../common/components/core/appBar/appBar';
-import useSongInfo from '../../common/hooks/useSongInfo';
 import useSpotify from '../../common/hooks/useSpotify';
 import { theme } from '../../redux/selecter';
 import Category from './components/category';
@@ -104,7 +103,7 @@ const Home: React.FC = () => {
         () => { }
     }, [spotifyApi, session])
 
-    if (!loader) {
+    if (loader === false) {
         return (
             <div className='w-full h-full bg-black flex justify-center items-center'>
                 <div role="status">
