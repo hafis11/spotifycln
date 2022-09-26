@@ -68,7 +68,7 @@ const Player: React.FC = () => {
     return (
         <>
             <Modal isOpen={isOpen} closeModal={closeModal} />
-            <div className={`w-full bg-gray-800/95 absolute ${songInfo ? 'flex' : 'hidden'} flex-row justify-between items-center bottom-0 z-50 h-[5.5rem] px-5`}>
+            <div className={`w-full bg-gray-800/95 absolute ${songInfo ? 'flex' : 'hidden'} flex-row justify-between items-center bottom-0 z-50 h-[5.5rem] px-5 hidden md:flex`}>
                 <div className='flex flex-row items-center w-80'>
                     <Image className='pointer-events-none' src={songInfo?.album?.images?.[0]?.url} width={40} height={50} />
                     <div className='pl-3 text-white'>

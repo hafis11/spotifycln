@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { getSession } from 'next-auth/react';
 import Head from 'next/head'
 import HomeLayout from '../src/common/components/layouts/home';
-import Home from '../src/components/playlist';
+import Home from '../src/components/home';
 import Player from '../src/components/playlist/components/player';
 import { wrapper } from '../src/redux';
 import { actions } from '../src/redux/slice';
@@ -16,7 +16,7 @@ const Index: NextPage = () => {
         <link rel="icon" href="/icons/favicon.ico" />
       </Head>
       <HomeLayout>
-
+        <Home />
       </HomeLayout>
       <Player />
     </div>

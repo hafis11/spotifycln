@@ -3,14 +3,30 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap");
 @layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
+  /* Style scrollbar for Chrome, Safari and Opera */
+  .style-scrollbar::-webkit-scrollbar {
     width: 16px;
     height: 16px;
+    display: flex;
   }
   ::-webkit-scrollbar-thumb {
     border-radius: 3px;
     background: #a3a1dd;
+  }
+  .style-scrollbar {
+    -ms-overflow-style: flex; /* IE and Edge */
+    scrollbar-width: flex; /* Firefox */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
 

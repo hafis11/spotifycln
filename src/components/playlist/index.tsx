@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import AppBar from './components/appBar';
+import AppBar from '../../common/components/core/appBar/appBar';
 import MusicList from './components/musicList';
 import PlayerProfile from './components/playerProfile';
 import { FastAverageColor } from "fast-average-color";
@@ -9,15 +9,12 @@ import { actions } from '../../redux/slice';
 import useSongInfo from '../../common/hooks/useSongInfo';
 
 
-const Home: React.FC = () => {
+const PlayList: React.FC = () => {
 
     const dispatch = useDispatch();
     const album = useSelector(albumList);
     const themeColor = useSelector(color);
     const songInfo: any = useSongInfo();
-
-    const Full = "100vh".split('"').join('');
-    const Half = "92vh".split('"').join('');
 
     useMemo(() => {
         const getTheme = () => {
@@ -25,7 +22,7 @@ const Home: React.FC = () => {
                 const fac = new FastAverageColor();
                 fac.getColorAsync(album?.images?.[0]?.url)
                     .then((color: any) => {
-                        dispatch(actions.saveTheme(color?.hex.split('"').join('')))
+                        dispatch(actions.saveTheme(color?.hex))
                     })
                     .catch((e) => {
                         console.log(e);
@@ -44,4 +41,4 @@ const Home: React.FC = () => {
     )
 }
 
-export default Home;
+export default PlayList;
