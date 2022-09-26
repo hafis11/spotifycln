@@ -6,7 +6,7 @@ import { selectedList, theme as color } from '../../../redux/selecter';
 const PlayerProfile: React.FC = () => {
 
     const playList = useSelector(selectedList);
-    const themeColor = useSelector(color);
+    const themeColor: string = useSelector(color);
 
     return (
         <div className={`w-full h-3/6 flex flex-col items-center justify-between bg-gradient-to-b from-[${themeColor}]`}>

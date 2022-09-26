@@ -8,8 +8,8 @@ import { actions } from '../../src/redux/slice';
 import { useMemo } from 'react';
 import useSpotify from '../../src/common/hooks/useSpotify';
 import { useDispatch } from 'react-redux';
-import Home from '../../src/components/playlist';
 import Player from '../../src/components/playlist/components/player';
+import PlayList from '../../src/components/playlist';
 
 
 const Index: NextPage = () => {
@@ -40,7 +40,7 @@ const Index: NextPage = () => {
                 <link rel="icon" href="/icons/favicon.ico" />
             </Head>
             <HomeLayout>
-                <Home />
+                <PlayList />
             </HomeLayout>
             <Player />
         </div>

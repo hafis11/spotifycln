@@ -1,4 +1,4 @@
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,10 +44,6 @@ const SideBar: React.FC<Props> = () => {
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                 </svg>
             </span>
-
-            <div onClick={() => signOut()} className='flex flex-row items-center py-3 cursor-pointer'>
-                <h5 className='pl-2 text-white font-semibold'>Log out</h5>
-            </div>
 
             {
                 Tab.map((item: any, index: number) => {
@@ -124,7 +120,7 @@ const Tab: Tabs[] = [
     },
     {
         title: "Your Library",
-        href: "/",
+        href: "/collection/playlists",
         icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 fill-white" viewBox="0 0 20 20" fill="currentColor">
             <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
         </svg>
