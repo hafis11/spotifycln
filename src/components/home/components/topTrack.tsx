@@ -27,7 +27,14 @@ const TopTrack: React.FC<Props> = ({ track, message }) => {
                                     </span>
                                 </div>
                                 <div className='flex flex-col py-3 pb-4'>
-                                    <h4 className='text-white font-bold text-sm line-clamp-1'>{item?.track?.name}</h4>
+                                    <h4 className='text-white font-bold text-sm line-clamp-1'>{item?.name}</h4>
+                                    <h4 className='text-white font-light text-xs line-clamp-1'>
+                                        {
+                                            item?.artists.map((item: any, index: any) => {
+                                                return <span key={index}>{item?.name},</span>
+                                            })
+                                        }
+                                    </h4>
                                 </div>
                             </div>
                         )
