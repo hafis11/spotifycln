@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require("next-pwa")({
-  dest: "public",
-});
+const nextConfig = {
+  images: {
+    domains: ["i.scdn.co", "mosaic.scdn.co", "seed-mix-image.spotifycdn.com"],
+  },
+};
 
-module.exports = withPWA({
-  images: { domains: ["mosaic.scdn.co", "i.scdn.co"] },
-  reactStrictMode: true,
-});
+module.exports = nextConfig;
