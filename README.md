@@ -3,7 +3,7 @@
 
 A cool Spotify clone for educational purposes
 
-## Deploy your own
+## Screenshots
 
 
 ![alt text](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot1.png?raw=true)
