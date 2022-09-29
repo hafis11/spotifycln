@@ -1,6 +1,7 @@
-# Next.js + Tailwind CSS Example
+# Spotify Clone with NEXT.JS(Middleware, Spotify API, Tailwind, NextAuth, Redux)
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+
+A cool Spotify clone for educational purposes
 
 ## Deploy your own
 
