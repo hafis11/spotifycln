@@ -8,6 +8,12 @@ A cool Spotify clone for educational purposes
 
 ![alt text](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot1.png?raw=true)
 
+![alt text](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot2.png?raw=true)
+
+![alt text](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot3.png?raw=true)
+
+![alt text](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot4.png?raw=true)
+
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
