@@ -6,7 +6,7 @@ A cool Spotify clone for educational purposes
 ## Deploy your own
 
 
-![alt text]([http://url/to/img.png](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot1.png))
+![alt text](https://github.com/hafis11/spotifycln/blob/92bfa36d7c1ac303698bc71c8a3694a4d9102e85/public/screenshot/Screenshot1.png?raw=true)
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
 
