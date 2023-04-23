@@ -35,7 +35,7 @@ const Home: React.FC = () => {
                 if (spotifyApi.getAccessToken()) {
                     /* Get a User’s Top Tracks*/
                     spotifyApi.getFeaturedPlaylists({
-                        limit: 6,
+                        limit: 4,
                         offset: 0,
                         country: 'IN',
                     })
@@ -44,21 +44,21 @@ const Home: React.FC = () => {
                         }, function (err) {
                             console.log("Something went wrong!", err);
                         });
-                    spotifyApi.searchPlaylists('workout', { limit: 6 })
+                    spotifyApi.searchPlaylists('workout', { limit: 4 })
                         .then(function (data: any) {
                             setWordOut(data?.body);
                         }, function (err) {
                             console.log('Something went wrong!', err);
                         });
 
-                    spotifyApi.getNewReleases({ limit: 6, offset: 0, country: 'IN', })
+                    spotifyApi.getNewReleases({ limit: 4, offset: 0, country: 'IN', })
                         .then(function (data: any) {
                             setAlbum(data?.body);
                         }, function (err) {
                             console.log("Something went wrong!", err);
                         });
 
-                    spotifyApi.getFeaturedPlaylists({ limit: 6, offset: 1, country: 'IN', timestamp: '2021-09-26T09:00:00' })
+                    spotifyApi.getFeaturedPlaylists({ limit: 4, offset: 1, country: 'IN', timestamp: '2021-09-26T09:00:00' })
                         .then(function (data) {
                             SetPlaylist(data.body);
                         }, function (err) {
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
                         });
 
                     spotifyApi.getMyRecentlyPlayedTracks({
-                        limit: 6
+                        limit: 8
                     }).then(function (data) {
                         // Output items
                         SetRecently(data.body);
@@ -76,7 +76,7 @@ const Home: React.FC = () => {
                     });
 
                     /* Get a User’s Top Tracks*/
-                    spotifyApi.getMyTopTracks({ limit: 6 })
+                    spotifyApi.getMyTopTracks({ limit: 4 })
                         .then(function (data) {
                             let topTracks = data.body.items;
                             SetTrack(topTracks);
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
                         });
 
                     spotifyApi.getCategories({
-                        limit: 8,
+                        limit: 6,
                         offset: 0,
                         country: 'IN',
                     })

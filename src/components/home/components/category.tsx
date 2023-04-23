@@ -53,7 +53,7 @@ const Category: React.FC<Props> = ({ categories }) => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2'>
+            <div className='grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 lg:grid-cols-3'>
                 {
                     categories?.map((item: any, index: any) => {
                         return (

@@ -15,7 +15,7 @@ const Library: React.FC<Props> = () => {
                 <h3 className='text-white font-bold text-xl'>Playlists</h3>
             </div>
 
-            <div className='w-full grid grid-cols-6 pb-7 gap-4 px-4'>
+            <div className='w-full grid grid-cols-6 lg:grid-cols-5 pb-7 gap-4 px-4'>
                 <div className='bg-gradient-to-r to-cyan-500 from-blue-500 p-3 rounded-lg shadow-sm cursor-pointer group relative col-span-2 text-white flex flex-col justify-end px-4'>
                     <div className='absolute w-full h-full left-0 bottom-0 flex items-center px-4'>
                         <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,

@@ -15,7 +15,7 @@ const TopTrack: React.FC<Props> = ({ track, message }) => {
                 <h3 className='text-white text-sm font-medium cursor-pointer'>SEE ALL</h3>
             </div>
 
-            <div className='w-full flex flex-row md:grid grid-cols-6 md:pb-7 gap-3 pb-0 md:gap-4 px-4 overflow-auto snap-x no-scrollbar'>
+            <div className='w-full flex flex-row md:grid grid-cols-6 lg:grid-cols-4 md:pb-7 gap-3 pb-0 md:gap-4 px-4 overflow-auto snap-x no-scrollbar'>
                 {
                     track?.map((item: any, index: number) => {
                         return (
